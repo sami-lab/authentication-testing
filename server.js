@@ -26,14 +26,6 @@ mongoose
   .then(() => console.log("DB connection Success"))
   .catch((err) => console.log(err));
 
-// set up a route to redirect http to https
-app.get("*", function (req, res) {
-  res.redirect("https://" + req.headers.host + req.url);
-
-  // Or, if you don't want to automatically detect the domain name from the request header, you can hard code it:
-  // res.redirect('https://example.com' + req.url);
-});
-
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`listening to port ${port}`);
