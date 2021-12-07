@@ -57,13 +57,13 @@ app.use("/api/v1/users", users);
 app.use("/api/v1/transactions", transactions);
 app.use(globalError);
 
-app.use(function (request, response, next) {
-  if (process.env.NODE_ENV != "development" && !request.secure) {
-    return response.redirect("https://" + request.headers.host + request.url);
-  }
+// app.use(function (request, response, next) {
+//   if (process.env.NODE_ENV != "development" && !request.secure) {
+//     return response.redirect("https://" + request.headers.host + request.url);
+//   }
 
-  next();
-});
+//   next();
+// });
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("client/build"));
   const path = require("path");
