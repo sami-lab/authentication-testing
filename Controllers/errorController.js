@@ -47,15 +47,15 @@ const sendErrProd = (err, res) => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
-  if (process.env.NODE_ENV == "development") {
-    sendErrDev(err, res);
-  } else {
-    let error;
-    if (err.name === "CastError") error = handleCastError(err);
-    if (err.code === "E11000") error = handleDuplicate(err);
-    if (err.name === "ValidationError") error = HandleValidationError(err);
-    if (err.name === "JsonWebTokenError") error = handleJWTErr();
-    if (err.name === "TokenExpiredError") error = handleJWTExpire();
-    sendErrProd(error, res);
-  }
+  // if (process.env.NODE_ENV == "development") {
+  //   sendErrDev(err, res);
+  // } else {
+  let error;
+  if (err.name === "CastError") error = handleCastError(err);
+  if (err.code === "E11000") error = handleDuplicate(err);
+  if (err.name === "ValidationError") error = HandleValidationError(err);
+  if (err.name === "JsonWebTokenError") error = handleJWTErr();
+  if (err.name === "TokenExpiredError") error = handleJWTExpire();
+  sendErrProd(error, res);
+  //}
 };
