@@ -117,8 +117,10 @@ exports.login = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email })
     .select("+password")
     .select("+emailVerified");
+  console.log(email, password, "--------------", user);
   //Comparing password
   if (!user || !(await user.correctPassword(password, user.password))) {
+    console.log("log");
     return next(new AppError("Incorrect Email or password", 401));
   } else if (!user || user.emailVerified === false) {
     return next(new AppError("Email not verified yet", 401));
